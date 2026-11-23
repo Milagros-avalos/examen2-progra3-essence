@@ -30,12 +30,8 @@ router.post("/login", async (req, res) => {
             });
         }
 
-        // Conservamos las columnas de la base de datos de Essence
-        const sql = `
-            SELECT id, nombre, correo
-            FROM \`user\`
-            WHERE correo = ? AND BINARY \`contraseña\` = ?
-        `;
+        // Buscamos el usuario usando la tabla y las columnas de Essence.
+        const sql = "SELECT * FROM `user` WHERE correo = ? AND `contraseña` = ?";
 
         const [rows] = await connection.query(sql, [email, password]);
 
