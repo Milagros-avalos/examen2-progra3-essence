@@ -11,6 +11,13 @@ const selectAllProducts = () => {
     return connection.query(sql);
 };
 
+// Obtiene únicamente los productos activos para el catálogo del cliente
+const selectActiveProducts = () => {
+    const sql = "SELECT * FROM productos WHERE estado = 1";
+
+    return connection.query(sql);
+};
+
 // Obtiene un producto por id (para buscar)
 const selectProductById = (id) => {
     const sql = "SELECT * FROM productos WHERE id= ?"; 
@@ -70,6 +77,7 @@ const deleteProduct = (id) => {
 
 const ProductModels = {
     selectAllProducts,
+    selectActiveProducts,
     selectProductById,
     insertProduct,
     updateProduct,

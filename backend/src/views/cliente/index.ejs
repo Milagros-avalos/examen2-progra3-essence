@@ -34,16 +34,28 @@
     </div>
 </header>
 
-<main>
-    <h1>Essence</h1>
+<main class="pagina-cliente">
+    <h1>Productos</h1>
 
     <section id="productos">
-        <h2>Productos</h2>
-        <p>Catálogo de productos Essence.</p>
-    </section>
+        <div class="catalogo">
+            <% if (listaProductos.length === 0) { %>
+                <p>No hay productos para mostrar.</p>
+            <% } %>
 
-    <section id="contacto">
-        <h2>Contacto</h2>
+            <% listaProductos.forEach((producto) => { %>
+                <article class="producto">
+                    <% if (producto.imagen) { %>
+                        <img src="<%= producto.imagen %>" alt="<%= producto.nombre %>">
+                    <% } else { %>
+                        <div class="producto-sin-imagen">Sin imagen</div>
+                    <% } %>
+
+                    <h2><%= producto.nombre %></h2>
+                    <p class="precio"><%= Number(producto.precio).toLocaleString("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 }) %></p>
+                </article>
+            <% }); %>
+        </div>
     </section>
 </main>
 

@@ -1,27 +1,15 @@
 <%- include("partials/head.ejs") %>
+<%- include("partials/header.ejs") %>
 
 <main>
-    <h1><%= title %> producto</h1>
-
-    <a href="/dashboard/principal">Volver al panel</a>
-
-    <% if (typeof error !== "undefined") { %>
-        <p><%= error %></p>
-    <% } %>
-
-    <form action="/dashboard/eliminar" method="POST">
+    <h1>Eliminar producto</h1>
+    <form id="eliminarProductoForm">
         <label for="idProducto">ID del producto:</label>
-
-        <input
-            type="number"
-            name="id"
-            id="idProducto"
-            min="1"
-            required
-        >
-
-        <button type="submit">Eliminar producto</button>
+        <input id="idProducto" name="id" type="number" min="1" required>
+        <button type="submit">Eliminar</button>
     </form>
+    <p id="mensaje" role="status"></p>
 </main>
 
+<script src="/js/delete.js" defer></script>
 <%- include("partials/footer.ejs") %>

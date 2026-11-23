@@ -1,52 +1,25 @@
 <%- include("partials/head.ejs") %>
+<%- include("partials/header.ejs") %>
 
 <main>
-    <h1><%= title %> producto</h1>
+    <h1>Crear producto</h1>
+    <form id="crearProductoForm">
+        <label for="nombre">Nombre:</label>
+        <input id="nombre" name="nombre" type="text" required>
 
-    <a href="/dashboard/principal">Volver al panel</a>
+        <label for="precio">Precio:</label>
+        <input id="precio" name="precio" type="number" min="1" step="1" required>
 
-    <% if (typeof error !== "undefined") { %>
-        <p><%= error %></p>
-    <% } %>
+        <label for="categoria">Categoría:</label>
+        <input id="categoria" name="categoria" type="text" value="Perfumes" required>
 
-    <form action="/dashboard/crear" method="POST">
-
-        <label for="nombreProducto">Nombre:</label>
-        <input
-            type="text"
-            name="nombre"
-            id="nombreProducto"
-            required
-        >
-
-        <label for="precioProducto">Precio:</label>
-        <input
-            type="number"
-            name="precio"
-            id="precioProducto"
-            min="0"
-            required
-        >
-
-        <label for="categoriaProducto">Categoría:</label>
-        <input
-            type="text"
-            name="categoria"
-            id="categoriaProducto"
-            value="Perfumes"
-            required
-        >
-
-        <label for="imagenProducto">URL de la imagen:</label>
-        <input
-            type="url"
-            name="imagen"
-            id="imagenProducto"
-            required
-        >
+        <label for="imagen">URL de la imagen:</label>
+        <input id="imagen" name="imagen" type="url" required>
 
         <button type="submit">Guardar producto</button>
     </form>
+    <p id="mensaje" role="status"></p>
 </main>
 
+<script src="/js/post.js" defer></script>
 <%- include("partials/footer.ejs") %>

@@ -1,77 +1,16 @@
 <%- include("partials/head.ejs") %>
+<%- include("partials/header.ejs") %>
 
 <main>
-    <h1><%= title %> productos</h1>
-
-    <a href="/dashboard/principal">Volver al panel</a>
-
-    <h2>Consultar producto</h2>
-
-    <form action="/dashboard/consultar" method="GET">
+    <h1>Consultar producto</h1>
+    <form id="consultarProductoForm">
         <label for="idProducto">ID del producto:</label>
-
-        <input
-            type="number"
-            name="id"
-            id="idProducto"
-            min="1"
-            required
-        >
-
+        <input id="idProducto" name="id" type="number" min="1" required>
         <button type="submit">Consultar</button>
     </form>
-
-    <% if (typeof mensaje !== "undefined") { %>
-        <p><%= mensaje %></p>
-    <% } %>
-
-    <% if (typeof producto !== "undefined" && producto) { %>
-
-        <h2>Producto encontrado</h2>
-
-        <table>
-            <tr>
-                <th>ID</th>
-                <td><%= producto.id %></td>
-            </tr>
-
-            <tr>
-                <th>Nombre</th>
-                <td><%= producto.nombre %></td>
-            </tr>
-
-            <tr>
-                <th>Precio</th>
-                <td>$<%= producto.precio %></td>
-            </tr>
-
-            <tr>
-                <th>Categoría</th>
-                <td><%= producto.categoria %></td>
-            </tr>
-
-            <tr>
-                <th>Imagen</th>
-                <td>
-                    <img
-                        src="<%= producto.imagen %>"
-                        alt="Imagen de <%= producto.nombre %>"
-                        width="120"
-                        height="120"
-                        style="object-fit: contain;"
-                    >
-                </td>
-            </tr>
-
-            <tr>
-                <th>Estado</th>
-                <td>
-                    <%= producto.estado ? "Activo" : "Inactivo" %>
-                </td>
-            </tr>
-        </table>
-
-    <% } %>
+    <p id="mensaje" role="status"></p>
+    <section id="resultadoProducto"></section>
 </main>
 
+<script src="/js/get.js" defer></script>
 <%- include("partials/footer.ejs") %>

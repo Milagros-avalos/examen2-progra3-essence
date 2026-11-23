@@ -4,11 +4,9 @@ import {
     vistaPrincipal,
     vistaConsultar,
     vistaCrear,
-    crearProducto,
+    vistaCrearUser,
     vistaModificar,
-    modificarProducto,
-    vistaEliminar,
-    eliminarProducto
+    vistaEliminar
 } from "../controllers/view.controllers.js";
 
 const router = Router();
@@ -21,17 +19,14 @@ router.get("/consultar", requireLogin, vistaConsultar);
 
 // Vista crear
 router.get("/crear", requireLogin, vistaCrear);
-// Endpoint para crear producto
-router.post("/crear", requireLogin, crearProducto);
+
+// Vista para crear un usuario administrador
+router.get("/crearUser", requireLogin, vistaCrearUser);
 
 // Vista modificar
 router.get("/modificar", requireLogin, vistaModificar);
-// Endpoint para modificar producto
-router.post("/modificar", requireLogin, modificarProducto);
 
 // Vista eliminar
 router.get("/eliminar", requireLogin, vistaEliminar);
-// Endpoint para eliminar producto
-router.post("/eliminar", requireLogin, eliminarProducto);
 
 export default router;

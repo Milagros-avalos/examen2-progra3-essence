@@ -1,0 +1,22 @@
+<%- include("partials/head.ejs") %>
+<%- include("partials/header.ejs") %>
+
+<main>
+    <h1>Crear usuario administrador</h1>
+    <form id="crearUsuarioForm">
+        <label for="nombreUsuario">Nombre:</label>
+        <input id="nombreUsuario" name="nombre" type="text" required>
+
+        <label for="correoUsuario">Correo:</label>
+        <input id="correoUsuario" name="correo" type="email" required>
+
+        <label for="contrasenaUsuario">Contraseña:</label>
+        <input id="contrasenaUsuario" name="contrasena" type="password" minlength="6" required>
+
+        <button type="submit">Crear usuario</button>
+    </form>
+    <p id="mensaje" role="status"></p>
+</main>
+
+<script src="/js/createUser.js" defer></script>
+<%- include("partials/footer.ejs") %>

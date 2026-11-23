@@ -1,13 +1,8 @@
 <%- include("partials/head.ejs") %>
+<%- include("partials/header.ejs") %>
 <main>
     <h1>Panel de administración de Essence</h1>
     <p>Hola, <%= usuario.name %>.</p>
-    <nav>
-        <a href="/dashboard/consultar">Consultar</a>
-        <a href="/dashboard/crear">Crear</a>
-        <a href="/dashboard/modificar">Modificar</a>
-        <a href="/dashboard/eliminar">Eliminar</a>
-    </nav>
 
     <h2>Productos</h2>
 
@@ -48,8 +43,5 @@
         </table>
     <% } %>
 
-    <form action="/logout" method="POST">
-        <button type="submit">Cerrar sesión</button>
-    </form>
 </main>
 <%- include("partials/footer.ejs") %>

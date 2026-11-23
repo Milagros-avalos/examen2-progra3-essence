@@ -1,9 +1,11 @@
 import express from "express";//Express es una librería de Node.js que te permite crear un servidor web de forma simple
+import cors from "cors";
 import session from "express-session";
 import { fileURLToPath } from "node:url";
 import environments from "./src/api/config/environments.js";
-import { authRoutes, viewRoutes } from "./src/api/routes/index.js";
+import { authRoutes, productRoutes, userRoutes, viewRoutes } from "./src/api/routes/index.js";
 import clientRoutes from "./src/api/routes/client.routes.js";
+import { loggerUrl } from "./src/api/middlewares/middlewares.js";
 
 const { port, session_key } = environments;
 const app = express();
@@ -13,12 +15,14 @@ app.set("views", fileURLToPath(new URL("./src/views/", import.meta.url)));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(fileURLToPath(new URL("./src/public/", import.meta.url))));
+app.use(cors());
+app.use(loggerUrl);
 
 // Middleware de sesion
 app.use(session({
     secret: session_key,
     resave: false, // Evita guardar la sesion si no hubo cambios
-    saveUninitialized: true // Configuracion utilizada en la guia del profesor
+    saveUninitialized: true
 }));
 
 app.get("/", (req, res) => {
@@ -27,6 +31,10 @@ app.get("/", (req, res) => {
 
 // Vista pública del cliente
 app.use("/cliente", clientRoutes);
+
+// API del administrador
+app.use("/api/products", productRoutes);
+app.use("/api/users", userRoutes);
 
 // Redirijo las peticiones del dashboard al modulo de rutas de vistas
 app.use("/dashboard", viewRoutes);
