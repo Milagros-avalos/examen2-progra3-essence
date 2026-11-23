@@ -1,6 +1,27 @@
 <%- include("partials/head.ejs") %>
+
 <main>
-    <h1><%= title %> productos</h1>
+    <h1><%= title %> producto</h1>
+
     <a href="/dashboard/principal">Volver al panel</a>
+
+    <% if (typeof error !== "undefined") { %>
+        <p><%= error %></p>
+    <% } %>
+
+    <form action="/dashboard/eliminar" method="POST">
+        <label for="idProducto">ID del producto:</label>
+
+        <input
+            type="number"
+            name="id"
+            id="idProducto"
+            min="1"
+            required
+        >
+
+        <button type="submit">Eliminar producto</button>
+    </form>
 </main>
+
 <%- include("partials/footer.ejs") %>

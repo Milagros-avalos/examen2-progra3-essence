@@ -1,6 +1,52 @@
 <%- include("partials/head.ejs") %>
+
 <main>
-    <h1><%= title %> productos</h1>
+    <h1><%= title %> producto</h1>
+
     <a href="/dashboard/principal">Volver al panel</a>
+
+    <% if (typeof error !== "undefined") { %>
+        <p><%= error %></p>
+    <% } %>
+
+    <form action="/dashboard/crear" method="POST">
+
+        <label for="nombreProducto">Nombre:</label>
+        <input
+            type="text"
+            name="nombre"
+            id="nombreProducto"
+            required
+        >
+
+        <label for="precioProducto">Precio:</label>
+        <input
+            type="number"
+            name="precio"
+            id="precioProducto"
+            min="0"
+            required
+        >
+
+        <label for="categoriaProducto">Categoría:</label>
+        <input
+            type="text"
+            name="categoria"
+            id="categoriaProducto"
+            value="Perfumes"
+            required
+        >
+
+        <label for="imagenProducto">URL de la imagen:</label>
+        <input
+            type="url"
+            name="imagen"
+            id="imagenProducto"
+            required
+        >
+
+        <button type="submit">Guardar producto</button>
+    </form>
 </main>
+
 <%- include("partials/footer.ejs") %>

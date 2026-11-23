@@ -1,6 +1,66 @@
 <%- include("partials/head.ejs") %>
+
 <main>
-    <h1><%= title %> productos</h1>
+    <h1><%= title %> producto</h1>
+
     <a href="/dashboard/principal">Volver al panel</a>
+
+    <% if (typeof error !== "undefined") { %>
+        <p><%= error %></p>
+    <% } %>
+
+    <form action="/dashboard/modificar" method="POST">
+
+        <label for="idProducto">ID del producto:</label>
+        <input
+            type="number"
+            name="id"
+            id="idProducto"
+            min="1"
+            required
+        >
+
+        <label for="nombreProducto">Nombre:</label>
+        <input
+            type="text"
+            name="nombre"
+            id="nombreProducto"
+            required
+        >
+
+        <label for="precioProducto">Precio:</label>
+        <input
+            type="number"
+            name="precio"
+            id="precioProducto"
+            min="0"
+            required
+        >
+
+        <label for="categoriaProducto">Categoría:</label>
+        <input
+            type="text"
+            name="categoria"
+            id="categoriaProducto"
+            required
+        >
+
+        <label for="imagenProducto">URL de la imagen:</label>
+        <input
+            type="url"
+            name="imagen"
+            id="imagenProducto"
+            required
+        >
+
+        <label for="estadoProducto">Estado:</label>
+        <select name="estado" id="estadoProducto" required>
+            <option value="1">Activo</option>
+            <option value="0">Inactivo</option>
+        </select>
+
+        <button type="submit">Modificar producto</button>
+    </form>
 </main>
+
 <%- include("partials/footer.ejs") %>
