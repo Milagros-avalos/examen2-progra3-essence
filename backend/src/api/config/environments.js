@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 
-dotenv.config();
+dotenv.config();// Carga las variables de entorno desde el archivo .env
 
 export default {
     port: process.env.PORT,

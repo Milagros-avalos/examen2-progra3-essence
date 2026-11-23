@@ -1,0 +1,50 @@
+<%- include("../partials/head.ejs") %>
+
+<header id="inicio">
+    <div class="encabezado">
+        <div class="buscador" role="search">
+            <input
+                type="search"
+                aria-label="Buscar productos"
+                placeholder="Buscar productos"
+            >
+        </div>
+
+        <img
+            class="logo"
+            src="/assets/img/Logotipo minimalista de essence.png"
+            alt="Essence"
+        >
+
+        <div class="encabezado-imagenes">
+            <a href="#" aria-label="Cuenta">
+                <img
+                    src="/assets/img/web/cuenta.svg"
+                    alt="Cuenta"
+                >
+            </a>
+
+            <a href="#" aria-label="Bolsa">
+                <img
+                    src="/assets/img/web/bolsa.svg"
+                    alt="Bolsa"
+                >
+            </a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <h1>Essence</h1>
+
+    <section id="productos">
+        <h2>Productos</h2>
+        <p>Catálogo de productos Essence.</p>
+    </section>
+
+    <section id="contacto">
+        <h2>Contacto</h2>
+    </section>
+</main>
+
+<%- include("../partials/footer.ejs") %>

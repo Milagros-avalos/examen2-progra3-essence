@@ -3,6 +3,7 @@ import session from "express-session";
 import { fileURLToPath } from "node:url";
 import environments from "./src/api/config/environments.js";
 import { authRoutes, viewRoutes } from "./src/api/routes/index.js";
+import clientRoutes from "./src/api/routes/client.routes.js";
 
 const { port, session_key } = environments;
 const app = express();
@@ -11,6 +12,7 @@ app.set("view engine", "ejs");
 app.set("views", fileURLToPath(new URL("./src/views/", import.meta.url)));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(fileURLToPath(new URL("./src/public/", import.meta.url))));
 
 // Middleware de sesion
 app.use(session({
@@ -22,6 +24,9 @@ app.use(session({
 app.get("/", (req, res) => {
     res.redirect("/login");
 });
+
+// Vista pública del cliente
+app.use("/cliente", clientRoutes);
 
 // Redirijo las peticiones del dashboard al modulo de rutas de vistas
 app.use("/dashboard", viewRoutes);
