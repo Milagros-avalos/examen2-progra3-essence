@@ -11,8 +11,16 @@ const selectAllProducts = () => {
     return connection.query(sql);
 };
 
+// Obtiene un producto por id (para buscar)
+const selectProductById = (id) => {
+    const sql = "SELECT * FROM productos WHERE id= ?"; 
+    
+    return connection.query(sql, [id]);
+}
+
 const ProductModels = {
-    selectAllProducts
+    selectAllProducts,
+    selectProductById
 };
 
 export default ProductModels;

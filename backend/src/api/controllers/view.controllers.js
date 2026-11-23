@@ -25,10 +25,42 @@ export const vistaPrincipal = async (req, res) => {
 };
 
 // Vista consultar
-export const vistaConsultar = (req, res) => {
-    res.render("get", {
-        title: "Consultar"
-    });
+export const vistaConsultar = async (req, res) => {
+    try{
+        const {id} = req.query;
+
+        //Muestra solo el form si no hay id 
+        if(!id){
+            return res.render("get",{
+                title: "Consultar",
+                producto: null
+            });
+        }
+
+        //Buscar producto desde modelo
+        const [rows] = await ProductModels.selectProductById(id);
+
+        //Si no exite mostramos el id 
+
+        if(rows.length === 0){
+            return res.render("get",{
+                title: "Consultar",
+                producto: null,
+                mensaje: "No se encontro ningun producto con ese id"
+            });
+        }
+
+        res.render("get", {
+            title: "Consultar",
+            producto: rows[0]
+        });
+    }
+    catch(error){
+        console.log("Error consultado producto: ", error)
+        res.status(500).json({
+            message: "Error interno añl consultar producto"
+        });
+    }
 };
 
 // Vista crear
