@@ -1,7 +1,7 @@
 // Este es el modulo mysql2 en modo promesas para peticiones asincronas a la bbdd
 import mysql2 from "mysql2/promise";
 //esto es la importancion de la database que configuramos en enviroments
-import enviroments from "../config/enviroments.js";
+import enviroments from "../config/environments.js";
 //creamos una coleccion que va a tener los datos de la conexion a la bbdd
 const {database} = enviroments;
 
@@ -10,7 +10,7 @@ const connection = mysql2.createPool({
     host: database.host,
     database: database.name,
     user:database.user,
-    password:database.pasword
+    password:database.password
 });
 
 //finalmente exportamos las conexiones para que sea reutilizado

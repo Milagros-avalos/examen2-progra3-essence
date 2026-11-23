@@ -1,0 +1,23 @@
+<%- include("partials/head.ejs") %>
+
+<main>
+    <h3 class="centrado"><%= about %></h3>
+
+    <!-- Formulario nativo de envio de login -->
+    <form class="form-login" action="/login" method="POST">
+        <label for="emailUser">Email</label>
+        <input type="email" name="email" id="emailUser" required>
+
+        <label for="passwordUser">Password</label>
+        <input type="password" name="password" id="passwordUser" required>
+
+        <input type="submit" value="Login">
+    </form>
+
+    <!-- Si existe un error, lo mostramos en la vista -->
+    <% if (typeof error !== "undefined") { %>
+        <p class="mensaje error centrado"><%= error %></p>
+    <% } %>
+</main>
+
+<%- include("partials/footer.ejs") %>

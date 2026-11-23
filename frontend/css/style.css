@@ -1,9 +1,14 @@
 .encabezado {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    display: flex;
     align-items: center;
     gap: 1rem;
     padding: 1rem;
+}
+
+.buscador,
+.encabezado-imagenes {
+    flex: 1;
+    min-width: 0;
 }
 
 .buscador input {
@@ -35,12 +40,22 @@
 
 @media (max-width: 540px) {
     .encabezado {
-        grid-template-columns: 1fr auto 1fr;
+        flex-wrap: wrap;
+    }
+
+    .encabezado::before {
+        content: "";
+        flex: 1;
+    }
+
+    .encabezado::before,
+    .encabezado-imagenes {
+        min-width: 3.75rem;
     }
 
     .buscador {
-        grid-column: 1 / -1;
-        grid-row: 2;
+        order: 1;
+        flex: 0 0 100%;
     }
 
     .buscador input {
@@ -48,6 +63,6 @@
     }
 
     .logo {
-        grid-column: 2;
+        max-width: max(0px, calc(100% - 9.5rem));
     }
 }
