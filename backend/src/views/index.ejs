@@ -2,46 +2,30 @@
 <%- include("partials/header.ejs") %>
 <main>
     <h1>Panel de administración de Essence</h1>
-    <p>Hola, <%= usuario.name %>.</p>
+    <p class="saludo">Hola, <%= usuario.name %>.</p>
 
     <h2>Productos</h2>
 
     <% if (listaProductos.length === 0) { %>
-        <p>No hay productos cargados.</p>
+        <p class="saludo">No hay productos cargados.</p>
     <% } else { %>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Precio</th>
-                    <th>Categoría</th>
-                    <th>Imagen</th>
-                    <th>Estado</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% listaProductos.forEach((producto) => { %>
-                    <tr>
-                        <td><%= producto.id %></td>
-                        <td><%= producto.nombre %></td>
-                        <td>$<%= producto.precio %></td>
-                        <td><%= producto.categoria %></td>
-                        <td>
-                            <img
-                                src="<%= producto.imagen %>"
-                                alt="Imagen de <%= producto.nombre %>"
-                                width="80"
-                                height="80"
-                                style="object-fit: contain;"
-                            >
-                        </td>
-                        <td><%= producto.estado ? "Activo" : "Inactivo" %></td>
-                    </tr>
-                <% }); %>
-            </tbody>
-        </table>
-    <% } %>
+        <div class="admin-catalogo">
+            <% listaProductos.forEach((producto) => { %>
+                <article class="admin-producto <%= producto.estado ? '' : 'inactivo' %>">
+                    <% if (producto.imagen) { %>
+                        <img src="<%= producto.imagen %>" alt="Imagen de <%= producto.nombre %>">
+                    <% } else { %>
+                        <div class="admin-producto-sin-imagen">Sin imagen</div>
+                    <% } %>
 
+                    <span class="producto-id">ID <%= producto.id %></span>
+                    <h3><%= producto.nombre %></h3>
+                    <p class="admin-categoria"><%= producto.categoria %></p>
+                    <p class="admin-precio"><%= Number(producto.precio).toLocaleString("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 }) %></p>
+                    <span class="estado <%= producto.estado ? 'activo' : 'inactivo' %>"><%= producto.estado ? "Activo" : "Inactivo" %></span>
+                </article>
+            <% }); %>
+        </div>
+    <% } %>
 </main>
 <%- include("partials/footer.ejs") %>
