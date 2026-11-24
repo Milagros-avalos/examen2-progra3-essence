@@ -1,0 +1,92 @@
+
+<%- include("../partials/head.ejs") %>
+
+<main class="pagina-cliente">
+
+    <section class="contenedor-carrito">
+
+        <h1>Mi carrito</h1>
+
+        <% if (!carrito || carrito.length === 0) { %>
+
+            <div class="carrito-vacio">
+                <h2>Tu carrito está vacío</h2>
+                <p>¡Todavía no agregaste productos!</p>
+                <a href="/cliente" class="btn-carrito">
+                    Volver al catálogo
+                </a>
+            </div>
+
+        <% } else { %>
+
+            <div class="lista-carrito">
+
+                <% carrito.forEach(producto => { %>
+
+                    <article class="producto-carrito">
+
+                        <div class="imagen-carrito">
+                            <% if (producto.imagen) { %>
+                                <img
+                                    src="<%= producto.imagen %>"
+                                    alt="<%= producto.nombre %>"
+                                >
+                            <% } else { %>
+                                <div class="sin-imagen">
+                                    Sin imagen
+                                </div>
+                            <% } %>
+                        </div>
+
+                        <div class="info-producto-carrito">
+
+                            <h3><%= producto.nombre %></h3>
+
+                            <p>
+                                Cantidad: <strong><%= producto.cantidad %></strong>
+                            </p>
+
+                            <p class="subtotal-carrito">
+                                <%= Number(producto.precio_total_producto).toLocaleString("es-AR", {
+                                    style: "currency",
+                                    currency: "ARS"
+                                }) %>
+                            </p>
+
+                        </div>
+
+                    </article>
+
+                <% }) %>
+
+            </div>
+
+            <div class="resumen-carrito">
+
+                <h2>
+                    Total:
+                    <%= Number(totalCarrito).toLocaleString("es-AR", {
+                        style: "currency",
+                        currency: "ARS"
+                    }) %>
+                </h2>
+
+                <form action="/cliente/confirmar-compra" method="POST">
+                    <button type="submit" class="btn-confirmar-compra">
+                        Confirmar compra
+                    </button>
+                </form>
+
+                <a href="/cliente" class="link-seguir-comprando">
+                    Seguir comprando
+                </a>
+
+            </div>
+
+        <% } %>
+
+    </section>
+
+</main>
+
+<%- include("../partials/footer.ejs") %>

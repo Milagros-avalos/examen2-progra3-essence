@@ -1,3 +1,23 @@
+
+/* =====================================
+   1. VARIABLES GENERALES
+===================================== */
+
+:root {
+    --color-principal: #222;
+    --color-secundario: #666;
+    --color-borde: #ddd;
+    --color-fondo: #f5f5f5;
+    --color-rosa: #d8a7b1;
+    --color-rosa-oscuro: #9b6875;
+    --radio: 8px;
+    --sombra: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* =====================================
+   2. ENCABEZADO
+===================================== */
+
 .encabezado {
     display: flex;
     align-items: center;
@@ -46,88 +66,15 @@
     height: 1.5rem;
 }
 
+/* =====================================
+   3. CONTENEDORES GENERALES
+===================================== */
+
 .pagina-cliente {
     max-width: 1200px;
     margin: 2rem auto;
     padding: 0 1rem;
 }
-
-.catalogo {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.producto {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    width: 220px;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-}
-
-.producto img,
-.producto-sin-imagen {
-    width: 100%;
-    height: 190px;
-    object-fit: contain;
-}
-
-.producto-sin-imagen {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #f5f5f5;
-    color: #666;
-}
-
-.producto h2,
-.producto p {
-    margin: 0;
-}
-
-.producto h2 {
-    font-size: 1rem;
-}
-
-.precio {
-    font-weight: bold;
-}
-
-.admin-header {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 1rem;
-    border-bottom: 1px solid #ddd;
-}
-
-.admin-logo {
-    color: #222;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.admin-header nav {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.admin-header nav a {
-    color: #222;
-}
-
-.admin-header nav form {
-    margin: 0;
-}
-
 
 main:not(.pagina-cliente) {
     max-width: 1100px;
@@ -143,27 +90,42 @@ main:not(.pagina-cliente) h2,
 }
 
 .saludo {
-    color: #666;
+    color: var(--color-secundario);
 }
 
-/* ===== ADMIN: listado de productos ===== */
+/* =====================================
+   4. CATÁLOGO DE PRODUCTOS
+===================================== */
+
+.catalogo,
 .admin-catalogo {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 1rem;
 }
 
+.admin-catalogo {
+    justify-content: center;
+}
+
+.producto,
 .admin-producto {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 0.4rem;
     width: 220px;
     padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio);
+}
+
+.producto {
+    gap: 0.5rem;
+}
+
+.admin-producto {
+    align-items: center;
+    gap: 0.4rem;
     background: #fff;
     text-align: center;
 }
@@ -172,42 +134,109 @@ main:not(.pagina-cliente) h2,
     opacity: 0.6;
 }
 
+.producto img,
+.producto-sin-imagen,
 .admin-producto img,
-.admin-producto-sin-imagen {
+.admin-producto-sin-imagen,
+#resultadoProducto img {
     width: 100%;
     height: 190px;
     object-fit: contain;
 }
 
+.producto-sin-imagen,
 .admin-producto-sin-imagen {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f5f5f5;
-    color: #666;
+    background: var(--color-fondo);
+    color: var(--color-secundario);
 }
 
+.producto h2,
+.producto p,
 .admin-producto h3,
 .admin-producto p {
     margin: 0;
 }
 
+.producto h2,
 .admin-producto h3 {
     font-size: 1rem;
 }
 
-.producto-id {
-    font-size: 0.75rem;
-    color: #888;
-}
-
-.admin-categoria {
-    font-size: 0.9rem;
-    color: #666;
-}
-
+.precio,
 .admin-precio {
     font-weight: bold;
+}
+
+.producto form {
+    margin-top: auto;
+}
+
+/* =====================================
+   5. BOTONES DEL CATÁLOGO
+===================================== */
+
+.btn-agregar-carrito {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 6px;
+    background: var(--color-principal);
+    color: white;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.btn-agregar-carrito:hover {
+    background: #555;
+}
+
+/* =====================================
+   6. ADMINISTRACIÓN
+===================================== */
+
+.admin-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem;
+    border-bottom: 1px solid var(--color-borde);
+}
+
+.admin-logo {
+    color: var(--color-principal);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.admin-header nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.admin-header nav a {
+    color: var(--color-principal);
+}
+
+.admin-header nav form {
+    margin: 0;
+}
+
+.producto-id,
+.admin-categoria {
+    font-size: 0.9rem;
+    color: var(--color-secundario);
+}
+
+.producto-id {
+    font-size: 0.75rem;
 }
 
 .estado {
@@ -224,10 +253,11 @@ main:not(.pagina-cliente) h2,
 
 .estado.inactivo {
     background: #eee;
-    color: #666;
+    color: var(--color-secundario);
 }
 
-/* ===== ADMIN: centrar form ===== */
+/* Formularios del administrador */
+
 main:not(.pagina-cliente) form {
     display: flex;
     flex-direction: column;
@@ -235,11 +265,10 @@ main:not(.pagina-cliente) form {
     max-width: 26rem;
     margin: 1.5rem auto;
     padding: 1.5rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio);
     background: #fff;
 }
-
 
 main:not(.pagina-cliente) form[hidden] {
     display: none;
@@ -266,7 +295,7 @@ main:not(.pagina-cliente) form input[type="submit"] {
     padding: 0.7rem;
     border: none;
     border-radius: 6px;
-    background: #222;
+    background: var(--color-principal);
     color: #fff;
     font: inherit;
     cursor: pointer;
@@ -277,7 +306,8 @@ main:not(.pagina-cliente) form input[type="submit"]:hover {
     background: #444;
 }
 
-/* ===== ADMIN: mensajes y resultado de consultar ===== */
+/* Mensajes y consultas */
+
 #mensaje,
 .mensaje {
     min-height: 1.5rem;
@@ -296,18 +326,188 @@ main:not(.pagina-cliente) form input[type="submit"]:hover {
     max-width: 260px;
     margin: 1rem auto;
     padding: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio);
     text-align: center;
 }
 
-#resultadoProducto img {
+/* =====================================
+   7. BIENVENIDA DEL CLIENTE
+===================================== */
+
+.bienvenida-cliente {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 85vh;
+    padding: 2rem;
+}
+
+.bienvenida-contenido {
     width: 100%;
-    height: 190px;
+    max-width: 420px;
+    text-align: center;
+}
+
+.bienvenida-logo {
+    width: 180px;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 1.5rem;
+}
+
+.bienvenida-contenido h1 {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+}
+
+.bienvenida-contenido p {
+    margin-bottom: 2rem;
+    color: var(--color-secundario);
+    line-height: 1.6;
+}
+
+.bienvenida-contenido form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: left;
+}
+
+.bienvenida-contenido label {
+    font-weight: bold;
+}
+
+/* =====================================
+   8. CARRITO DE COMPRAS
+===================================== */
+
+.contenedor-carrito {
+    width: 90%;
+    max-width: 950px;
+    margin: 40px auto;
+}
+
+.contenedor-carrito h1 {
+    margin-bottom: 35px;
+    text-align: center;
+}
+
+.lista-carrito {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.producto-carrito {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding: 20px;
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: var(--sombra);
+}
+
+.imagen-carrito {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 130px;
+    height: 130px;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #f5f1f3;
+}
+
+.imagen-carrito img {
+    display: block;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
 }
 
+.sin-imagen {
+    color: #888;
+    font-size: 13px;
+}
+
+.info-producto-carrito {
+    flex: 1;
+}
+
+.info-producto-carrito h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.info-producto-carrito p {
+    margin: 8px 0;
+}
+
+.subtotal-carrito {
+    font-weight: bold;
+}
+
+.resumen-carrito {
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 25px;
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: var(--sombra);
+    text-align: center;
+}
+
+.resumen-carrito h2 {
+    margin-bottom: 25px;
+}
+
+.btn-confirmar-compra,
+.btn-carrito {
+    display: inline-block;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    background: var(--color-rosa);
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-confirmar-compra:hover,
+.btn-carrito:hover {
+    background: #f7f6f6;
+}
+
+.link-seguir-comprando {
+    display: block;
+    margin-top: 18px;
+    color: var(--color-rosa-oscuro);
+    text-decoration: none;
+}
+
+.link-seguir-comprando:hover {
+    text-decoration: underline;
+}
+
+.carrito-vacio {
+    padding: 50px 20px;
+    border-radius: 15px;
+    background: #fff;
+    text-align: center;
+}
+
+/* =====================================
+   9. DISEÑO RESPONSIVE
+===================================== */
+
 @media (max-width: 540px) {
+
     .encabezado {
         flex-wrap: wrap;
     }
@@ -315,9 +515,9 @@ main:not(.pagina-cliente) form input[type="submit"]:hover {
     .encabezado::before {
         content: "";
         flex: 1;
+        min-width: 3.75rem;
     }
 
-    .encabezado::before,
     .encabezado-imagenes {
         min-width: 3.75rem;
     }
@@ -333,5 +533,31 @@ main:not(.pagina-cliente) form input[type="submit"]:hover {
 
     .logo {
         max-width: max(0px, calc(100% - 9.5rem));
+    }
+}
+
+@media (max-width: 600px) {
+
+    .contenedor-carrito {
+        width: 94%;
+        margin: 25px auto;
+    }
+
+    .producto-carrito {
+        gap: 15px;
+        padding: 12px;
+    }
+
+    .imagen-carrito {
+        width: 100px;
+        height: 100px;
+    }
+
+    .info-producto-carrito h3 {
+        font-size: 16px;
+    }
+
+    .resumen-carrito {
+        padding: 20px 12px;
     }
 }

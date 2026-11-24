@@ -24,10 +24,10 @@
                 >
             </a>
 
-            <a href="#" aria-label="Bolsa">
+            <a href="/cliente/carrito" aria-label="Mi carrito">
                 <img
                     src="/assets/img/web/bolsa.svg"
-                    alt="Bolsa"
+                    alt="Mi carrito"
                 >
             </a>
         </div>
@@ -35,7 +35,10 @@
 </header>
 
 <main class="pagina-cliente">
-    <h1>Productos</h1>
+    <h1>¡Hola, <%= nombreCliente %>!</h1>
+    <p>Nos alegra tenerte en Essence.</p>
+
+    <h2>Productos</h2>
 
     <section id="productos">
         <div class="catalogo">
@@ -53,6 +56,17 @@
 
                     <h2><%= producto.nombre %></h2>
                     <p class="precio"><%= Number(producto.precio).toLocaleString("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 }) %></p>
+                    <form action="/cliente/carrito" method="POST">
+                        <input
+                            type="hidden"
+                            name="productoId"
+                            value="<%= producto.id %>"
+                        >
+
+                        <button type="submit" class="btn-agregar-carrito">
+                            Agregar al carrito
+                        </button>
+                    </form>
                 </article>
             <% }); %>
         </div>

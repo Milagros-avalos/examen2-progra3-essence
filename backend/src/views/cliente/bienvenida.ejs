@@ -1,0 +1,45 @@
+
+<%- include("../partials/head.ejs") %>
+
+<main class="bienvenida-cliente">
+
+    <div class="bienvenida-contenido">
+
+        <img
+            class="bienvenida-logo"
+            src="/assets/img/Logotipo minimalista de essence.png"
+            alt="Essence"
+        >
+
+        <h1>¡Bienvenido a Essence!</h1>
+
+        <p>
+            Nos alegra tenerte acá.
+            Antes de comenzar, contanos cómo te llamás.
+        </p>
+
+        <form action="/cliente/nombre" method="POST">
+
+            <label for="nombre">Tu nombre</label>
+
+            <input
+                type="text"
+                id="nombre"
+                name="nombre"
+                placeholder="Ingresá tu nombre..."
+                maxlength="50"
+                required
+                autofocus
+            >
+
+            <button type="submit">
+                Ingresar
+            </button>
+
+        </form>
+
+    </div>
+
+</main>
+
+<%- include("../partials/footer.ejs") %>

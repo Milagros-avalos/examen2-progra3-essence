@@ -1,0 +1,114 @@
+
+<%- include("../partials/head.ejs") %>
+
+<main class="pagina-cliente">
+
+    <h1>Factura de compra - ESSENCE</h1>
+
+    <p>Cliente: <%= compra.nombre_cliente %></p>
+    <p>Número de compra: <%= compra.id %></p>
+
+    <h2>Productos</h2>
+
+    <% items.forEach(producto => { %>
+        <p>
+            <%= producto.nombre %> -
+            Cantidad: <%= producto.cantidad %>
+        </p>
+    <% }) %>
+
+    <h3>
+        Total:
+        <%= Number(compra.total_carrito).toLocaleString("es-AR", {
+            style: "currency",
+            currency: "ARS"
+        }) %>
+    </h3>
+
+    <button id="descargarFactura">
+        Descargar factura PDF
+    </button>
+
+</main>
+
+<script src="/js/jspdf/jspdf.umd.min.js"></script>
+
+<script id="datos-compra" type="application/json">
+    <%- JSON.stringify({
+        total: Number(compra.total_carrito),
+        id: compra.id,
+        nombre_cliente: compra.nombre_cliente
+    }) %>
+</script>
+
+<script id="datos-productos" type="application/json">
+    <%- JSON.stringify(items.map(producto => ({
+        nombre: producto.nombre,
+        cantidad: producto.cantidad,
+        subtotal: Number(producto.precio_total_producto)
+    }))) %>
+</script>
+
+<script>
+    document.getElementById("descargarFactura").addEventListener("click", () => {
+
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        const compra = JSON.parse(
+            document.getElementById("datos-compra").textContent
+        );
+
+        const productos = JSON.parse(
+            document.getElementById("datos-productos").textContent
+        );
+
+        doc.setFontSize(22);
+        doc.text("ESSENCE", 105, 20, { align: "center" });
+
+        doc.setFontSize(16);
+        doc.text("Factura de compra", 105, 32, { align: "center" });
+
+        doc.setFontSize(12);
+        doc.text("Cliente: " + compra.nombre_cliente, 20, 50);
+        doc.text("Compra: " + compra.id, 20, 60);
+
+        let posicionY = 80;
+
+        productos.forEach(producto => {
+
+            if (posicionY > 260) {
+                doc.addPage();
+                posicionY = 20;
+            }
+
+            doc.text(producto.nombre, 20, posicionY);
+
+            doc.text(
+                "Cantidad: " + producto.cantidad,
+                20,
+                posicionY + 8
+            );
+
+            doc.text(
+                "Subtotal: $" + producto.subtotal.toFixed(2),
+                20,
+                posicionY + 16
+            );
+
+            posicionY += 25;
+        });
+
+        doc.setFontSize(14);
+
+        doc.text(
+            "TOTAL: $" + compra.total.toFixed(2),
+            20,
+            posicionY + 10
+        );
+
+        doc.save("Factura_Essence_" + compra.id + ".pdf");
+    });
+</script>
+
+<%- include("../partials/footer.ejs") %>
